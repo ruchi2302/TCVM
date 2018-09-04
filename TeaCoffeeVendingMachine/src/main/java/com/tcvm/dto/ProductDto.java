@@ -23,5 +23,4 @@ public class ProductDto {
 		this.productQuantity = productQuantity;
 		this.productCost = productCost;
 	}
-
 }

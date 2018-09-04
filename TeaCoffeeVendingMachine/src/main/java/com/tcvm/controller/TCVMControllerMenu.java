@@ -6,7 +6,6 @@ import com.tcvm.dto.MakeBlackCoffee;
 import com.tcvm.dto.MakeBlackTea;
 import com.tcvm.dto.MakeCoffee;
 import com.tcvm.dto.MakeTea;
-import com.tcvm.service.TCVMMakingDrink;
 import com.tcvm.serviceImpl.BlackCoffeeAvailability;
 import com.tcvm.serviceImpl.BlackTeaAvailability;
 import com.tcvm.serviceImpl.CheckTotalSale;
@@ -17,25 +16,19 @@ import com.tcvm.serviceImpl.ProductRecord;
 import com.tcvm.serviceImpl.RefillContainer;
 import com.tcvm.serviceImpl.ResetContainer;
 import com.tcvm.serviceImpl.TeaAvailability;
-import com.tcvm.serviceImpl.WasteProductRecord;
 
 public class TCVMControllerMenu {
 
 	InputScanner inputScanner;
-
-	TCVMMakingDrink makeDrink;
-
 	RefillContainer refillContainer;
 	MakeTea makeTea;
 	MakeCoffee makeCoffee;
 	MakeBlackTea makeBlackTea;
 	MakeBlackCoffee makeBlackCoffee;
-
 	CheckTotalSale checkTotalSale;
-
 	ContainerStatus containerStatus;
-
 	ResetContainer resetContainer;
+	ProductRecord productRecord;
 	TeaAvailability teaAvailability;
 	CoffeeAvailability coffeeAvailability;
 	BlackTeaAvailability blackTeaAvailability;
@@ -46,8 +39,11 @@ public class TCVMControllerMenu {
 		inputScanner = new InputScanner();
 
 		makeTea = new MakeTea();
+
 		makeCoffee = new MakeCoffee();
+
 		makeBlackTea = new MakeBlackTea();
+
 		makeBlackCoffee = new MakeBlackCoffee();
 
 		refillContainer = new RefillContainer();
@@ -57,26 +53,32 @@ public class TCVMControllerMenu {
 		containerStatus = new ContainerStatus();
 
 		resetContainer = new ResetContainer();
+
+		productRecord = new ProductRecord();
+
 		teaAvailability = new TeaAvailability();
+
 		coffeeAvailability = new CoffeeAvailability();
+
 		blackTeaAvailability = new BlackTeaAvailability();
+
 		blackCoffeeAvailability = new BlackCoffeeAvailability();
 
 	}
 
-	public TCVMControllerMenu(InputScanner inputScanner, TCVMMakingDrink makeDrink, RefillContainer refillContainer,
-			CheckTotalSale checkTotalSale, ContainerStatus containerStatus, ResetContainer resetContainer,
-			TeaAvailability teaAvailability, CoffeeAvailability coffeeAvailability,
-			BlackTeaAvailability blackTeaAvailability, BlackCoffeeAvailability blackCoffeeAvailability, MakeTea makeTea,
-			MakeCoffee makeCoffee, MakeBlackTea makeBlackTea, MakeBlackCoffee makeBlackCoffee) {
+	public TCVMControllerMenu(CheckTotalSale checkTotalSale, ContainerStatus containerStatus,
+			ResetContainer resetContainer, ProductRecord productRecord, TeaAvailability teaAvailability,
+			CoffeeAvailability coffeeAvailability, BlackTeaAvailability blackTeaAvailability,
+			BlackCoffeeAvailability blackCoffeeAvailability, MakeTea makeTea, MakeCoffee makeCoffee,
+			MakeBlackTea makeBlackTea, MakeBlackCoffee makeBlackCoffee, InputScanner inputScanner, RefillContainer refillContainer) {
 
 		super();
 		this.inputScanner = inputScanner;
-		this.makeDrink = makeDrink;
 		this.refillContainer = refillContainer;
 		this.checkTotalSale = checkTotalSale;
 		this.containerStatus = containerStatus;
 		this.resetContainer = resetContainer;
+		this.productRecord = productRecord;
 		this.teaAvailability = teaAvailability;
 		this.coffeeAvailability = coffeeAvailability;
 		this.blackTeaAvailability = blackTeaAvailability;
@@ -113,13 +115,11 @@ public class TCVMControllerMenu {
 			if (!teaAvailability.checkAvailabilityForDrink(quantity1)) {
 				System.out.println("NO ENOUGH MATERIAL AVAILABLE..");
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+				repeatMenu();
 			} else {
-				makeDrink.makeProcess(quantity1);
+				makeTea.makeProcess(quantity1);
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+				repeatMenu();
 			}
 
 			break;
@@ -130,13 +130,11 @@ public class TCVMControllerMenu {
 			if (!coffeeAvailability.checkAvailabilityForDrink(quantity2)) {
 				System.out.println("NO ENOUGH MATERIAL AVAILABLE..");
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+				repeatMenu();// viewMenu();
 			} else {
-				makeDrink.makeProcess(quantity2);
+				makeCoffee.makeProcess(quantity2);
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+				repeatMenu();// viewMenu();
 			}
 
 			break;
@@ -148,13 +146,11 @@ public class TCVMControllerMenu {
 			if (!blackTeaAvailability.checkAvailabilityForDrink(quantity3)) {
 				System.out.println("NO ENOUGH MATERIAL AVAILABLE..");
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+				repeatMenu();
 			} else {
-				makeDrink.makeProcess(quantity3);
+				makeBlackTea.makeProcess(quantity3);
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+				repeatMenu();
 			}
 			break;
 
@@ -165,14 +161,13 @@ public class TCVMControllerMenu {
 			if (!blackCoffeeAvailability.checkAvailabilityForDrink(quantity4)) {
 				System.out.println("NO ENOUGH MATERIAL AVAILABLE..");
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+				repeatMenu();
 			} else {
 
-				makeDrink.makeProcess(quantity4);
+				makeBlackCoffee.makeProcess(quantity4);
 				System.out.println("Press 0 for main menu");
-				if (getQuantity() == 0)
-					viewMenu();
+
+				repeatMenu();
 			}
 			break;
 
@@ -184,9 +179,6 @@ public class TCVMControllerMenu {
 
 			refillContainer.refillContainer(getQuantity());
 			System.out.println("Press 0 for main menu");
-			/*
-			 * if (getQuantity() == 0) viewMenu();
-			 */
 			repeatMenu();
 			break;
 
@@ -194,10 +186,6 @@ public class TCVMControllerMenu {
 			System.out.println("Check Total Sale....");
 			checkTotalSale.productTotalSale();
 			System.out.println("Press 0 for main menu");
-			// int inputScanner.nextInt();
-			/*
-			 * if (getQuantity() == 0) viewMenu();
-			 */
 			repeatMenu();
 
 			break;
@@ -206,8 +194,7 @@ public class TCVMControllerMenu {
 			System.out.println("Container Status");
 			containerStatus.showContainerStatus();
 			System.out.println("Press 0 for main menu");
-			if (getQuantity() == 0)
-				viewMenu();
+			repeatMenu();
 
 			break;
 
@@ -215,8 +202,7 @@ public class TCVMControllerMenu {
 			System.out.println("Reset Container");
 			resetContainer.resetContainer();
 			System.out.println("Press 0 for main menu");
-			if (getQuantity() == 0)
-				viewMenu();
+			repeatMenu();
 
 			break;
 
@@ -230,7 +216,7 @@ public class TCVMControllerMenu {
 			chooseAnyOptions();
 			break;
 		}
-
+ 
 	}
 
 	public void viewMenu() {

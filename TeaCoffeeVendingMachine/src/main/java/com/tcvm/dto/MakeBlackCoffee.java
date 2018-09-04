@@ -26,6 +26,10 @@ public class MakeBlackCoffee implements TCVMMakingDrink {
 
 	public MakeBlackCoffee() {
 
+		containerController = new ContainerController();
+		productRecord = new ProductRecord();
+		wasteProductRecord = new WasteProductRecord();
+
 	}
 
 	public MakeBlackCoffee(ContainerController containerController, ProductRecord productRecord,
@@ -36,7 +40,7 @@ public class MakeBlackCoffee implements TCVMMakingDrink {
 		this.wasteProductRecord = wasteProductRecord;
 	}
 
-	@Override
+	
 	public void makeProcess(int productQuantity) throws IOException {
 
 		int coffeeAvailableQuantity = containerController.getContainerInstance().getTeaContainer();

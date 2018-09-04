@@ -23,6 +23,9 @@ public class MakeBlackTea implements TCVMMakingDrink {
 	WasteProductRecord wasteProductRecord;
 
 	public MakeBlackTea() {
+		containerController = new ContainerController();
+		productRecord = new ProductRecord();
+		wasteProductRecord = new WasteProductRecord();
 
 	}
 
@@ -34,22 +37,19 @@ public class MakeBlackTea implements TCVMMakingDrink {
 		this.wasteProductRecord = wasteProductRecord;
 	}
 
-	@Override
+	
 	public void makeProcess(int productQuantity) throws IOException {
 
-		
-			int teaAvailableQuantity = containerController.getContainerInstance().getTeaContainer();
-			int waterAvailableQuantity = containerController.getContainerInstance().getWaterContainer();
-			int sugarAvailableQuantity = containerController.getContainerInstance().getSugarContainer();
+		int teaAvailableQuantity = containerController.getContainerInstance().getTeaContainer();
+		int waterAvailableQuantity = containerController.getContainerInstance().getWaterContainer();
+		int sugarAvailableQuantity = containerController.getContainerInstance().getSugarContainer();
 
-			updateQuantity(productQuantity, teaAvailableQuantity, waterAvailableQuantity, sugarAvailableQuantity);
-			productRecord.addProductInList(
-					new ProductDto("black tea", productQuantity, productQuantity * BLACK_TEA_PRICE));
+		updateQuantity(productQuantity, teaAvailableQuantity, waterAvailableQuantity, sugarAvailableQuantity);
+		productRecord.addProductInList(new ProductDto("black tea", productQuantity, productQuantity * BLACK_TEA_PRICE));
 
-			System.out.println(productQuantity + " cup blak tea " + productQuantity + "*" + BLACK_TEA_PRICE + " = "
-					+ productQuantity * BLACK_TEA_PRICE);
-		}
-	
+		System.out.println(productQuantity + " cup blak tea " + productQuantity + "*" + BLACK_TEA_PRICE + " = "
+				+ productQuantity * BLACK_TEA_PRICE);
+	}
 
 	public void updateQuantity(int productQuantity, int teaAvailableQuantity, int waterAvailableQuantity,
 			int sugarAvailableQuantity) throws IOException {

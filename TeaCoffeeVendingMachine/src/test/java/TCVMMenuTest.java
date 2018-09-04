@@ -10,6 +10,8 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.tcvm.controller.TCVMControllerMenu;
+import com.tcvm.dto.MakeBlackCoffee;
+import com.tcvm.dto.MakeBlackTea;
 import com.tcvm.dto.MakeCoffee;
 import com.tcvm.dto.MakeTea;
 import com.tcvm.serviceImpl.BlackCoffeeAvailability;
@@ -50,6 +52,12 @@ public class TCVMMenuTest {
 	MakeCoffee makeCoffee;
 
 	@Mock
+	MakeBlackTea makeBlackTea;
+
+	@Mock
+	MakeBlackCoffee makeBlackCoffee;
+
+	@Mock
 	RefillContainer refillContainer;
 
 	@Mock
@@ -82,7 +90,7 @@ public class TCVMMenuTest {
 
 	@Test
 	public void shouldCheckSwitchCaseTwoMakeCoffe() throws IOException {
- 
+
 		when(inputScanner.nextInt()).thenReturn(2);
 		when(coffeeAvailability.checkAvailabilityForDrink(Mockito.anyInt())).thenReturn(true);
 		Mockito.doNothing().when(makeCoffee).makeProcess(Mockito.anyInt());
@@ -96,21 +104,20 @@ public class TCVMMenuTest {
 
 		when(inputScanner.nextInt()).thenReturn(2);
 		when(coffeeAvailability.checkAvailabilityForDrink(Mockito.anyInt())).thenReturn(false);
-		Mockito.doNothing().when(makeCoffee).makeProcess(Mockito.anyInt());
 		tcvmMenu.chooseAnyOptions();
 		Mockito.verify(coffeeAvailability).checkAvailabilityForDrink(Mockito.anyInt());
 
-	} 
+	}
 
 	@Test
 	public void shouldCheckSwitchCaseThreeMakeBlackTea() throws IOException {
 		when(inputScanner.nextInt()).thenReturn(3).thenReturn(1);
 		when(blackTeaAvailability.checkAvailabilityForDrink(Mockito.anyInt())).thenReturn(true);
+		Mockito.doNothing().when(makeBlackTea).makeProcess(Mockito.anyInt());
 		tcvmMenu.chooseAnyOptions();
 		Mockito.verify(blackTeaAvailability).checkAvailabilityForDrink(Mockito.anyInt());
 	}
 
-	
 	@Test
 	public void shouldCheckSwitchCaseThreeMakeBlackTeaNegative() throws IOException {
 		when(inputScanner.nextInt()).thenReturn(3).thenReturn(1);
@@ -118,15 +125,16 @@ public class TCVMMenuTest {
 		tcvmMenu.chooseAnyOptions();
 		Mockito.verify(blackTeaAvailability).checkAvailabilityForDrink(Mockito.anyInt());
 	}
+
 	@Test
 	public void shouldCheckSwitchCaseFourMakeBlackCoffee() throws IOException {
 		when(inputScanner.nextInt()).thenReturn(4).thenReturn(1);
 		when(blackCoffeeAvailability.checkAvailabilityForDrink(Mockito.anyInt())).thenReturn(true);
+		Mockito.doNothing().when(makeBlackCoffee).makeProcess(Mockito.anyInt());
 		tcvmMenu.chooseAnyOptions();
 		Mockito.verify(blackCoffeeAvailability).checkAvailabilityForDrink(Mockito.anyInt());
 	}
 
-	
 	@Test
 	public void shouldCheckSwitchCaseFourMakeBlackCoffeeNegative() throws IOException {
 		when(inputScanner.nextInt()).thenReturn(4).thenReturn(1);
@@ -134,14 +142,14 @@ public class TCVMMenuTest {
 		tcvmMenu.chooseAnyOptions();
 		Mockito.verify(blackCoffeeAvailability).checkAvailabilityForDrink(Mockito.anyInt());
 	}
+
 	@Test
 	public void shouldCheckSwitchCaseFiveRefillContainer() throws IOException {
 		when(inputScanner.nextInt()).thenReturn(5).thenReturn(1);
 		Mockito.doNothing().when(refillContainer).refillContainer(Mockito.anyInt());
 		tcvmMenu.chooseAnyOptions();
-
 		Mockito.verify(refillContainer).refillContainer(Mockito.anyInt());
- 
+
 	}
 
 	@Test
@@ -177,6 +185,12 @@ public class TCVMMenuTest {
 		// Mockito.when(resetContainer.resetContainer()).thenReturn(true);
 		tcvmMenu.chooseAnyOptions();
 		// Mockito.verify(resetContainer).resetContainer();
+	}
+
+	@Test
+	public void shouldDefault() throws IOException {
+		when(inputScanner.nextInt()).thenReturn(10).thenReturn(1);
+		tcvmMenu.chooseAnyOptions();
 	}
 
 	@Test

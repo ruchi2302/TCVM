@@ -27,6 +27,9 @@ public class MakeCoffee implements TCVMMakingDrink {
 	AllDrinkAvailability drinkAvailability;
 
 	public MakeCoffee() {
+		containerController = new ContainerController();
+		productRecord = new ProductRecord();
+		wasteProductRecord = new WasteProductRecord();
 
 	}
 
@@ -38,7 +41,7 @@ public class MakeCoffee implements TCVMMakingDrink {
 		this.wasteProductRecord = wasteProductRecord;
 	}
 
-	@Override
+	
 	public void makeProcess(int productQuantity) throws IOException {
 
 		int coffeeAvailableQuantity = containerController.getContainerInstance().getCoffeeContainer();
@@ -48,8 +51,7 @@ public class MakeCoffee implements TCVMMakingDrink {
 
 		updateQuantity(productQuantity, coffeeAvailableQuantity, waterAvailableQuantity, milkAvailableQuantity,
 				sugarAvailableQuantity);
-		productRecord.addProductInList(
-				new ProductDto("coffee", productQuantity, productQuantity * COFFEE_PRICE));
+		productRecord.addProductInList(new ProductDto("coffee", productQuantity, productQuantity * COFFEE_PRICE));
 		System.out.println(productQuantity + " cup tea " + productQuantity + "*" + COFFEE_PRICE + " = "
 				+ productQuantity * COFFEE_PRICE);
 

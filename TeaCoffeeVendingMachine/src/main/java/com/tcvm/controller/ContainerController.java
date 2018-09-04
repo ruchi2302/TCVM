@@ -8,7 +8,7 @@ import com.tcvm.dto.ContainerDto;
 
 public class ContainerController { 
 
-	static ContainerDto containerDto;
+	static ContainerDto containerDto; 
 
 	public ContainerDto getContainerInstance() throws IOException {
 		Map<String, Integer> containerData = createContainerData();
@@ -23,7 +23,7 @@ public class ContainerController {
 	}
 
 	public Map createContainerData() {
-		Map<String, Integer> containerData = new HashMap<>();
+		Map<String, Integer> containerData = new HashMap<String, Integer>();
 		containerData.put("teaContainer", 2000);
 		containerData.put("coffeeContainer", 2000);
 		containerData.put("sugarContainer", 8000);
@@ -31,6 +31,6 @@ public class ContainerController {
 		containerData.put("milkContainer", 10000);
 
 		return containerData;
-	}
+	} 
  
 }

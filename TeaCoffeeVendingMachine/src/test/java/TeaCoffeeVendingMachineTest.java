@@ -33,7 +33,7 @@ public class TeaCoffeeVendingMachineTest {
 		assertEquals(8000, containerController.getContainerInstance().getSugarContainer());
 		assertEquals(10000, containerController.getContainerInstance().getMilkContainer());
 	}
-  
+
 	@Test
 	public void shouldContainerFilledWithNeededMaterialForMakingDrink() throws IOException {
 		AllDrinkAvailability teaAvailability = new TeaAvailability();
@@ -51,26 +51,5 @@ public class TeaCoffeeVendingMachineTest {
 		Assert.assertFalse(blackTeaAvailability.checkAvailabilityForDrink(200000));
 		Assert.assertFalse(blackCoffeAvailability.checkAvailabilityForDrink(200000));
 
-	} 
-
-	/*
-	 * @Test public void shouldSystemSupportToMakeTea() { makeTea.makePocess(2);
-	 * Mockito.verify(makeTea).makePocess(2);
-	 * 
-	 * }
-	 * 
-	 * @Test public void shouldSystemSupportToMakeCoffee() {
-	 * makeCoffee.makePocess(1); Mockito.verify(makeCoffee).makePocess(1);
-	 * 
-	 * }
-	 * 
-	 * @Test public void shouldSystemSupportToMakeBlackTea() {
-	 * makeBlackTea.makePocess(2); Mockito.verify(makeBlackTea).makePocess(2); }
-	 * 
-	 * @Test public void shouldSystemSupportToMakeBlackCoffee() {
-	 * makeBlackCoffee.makePocess(1);
-	 * Mockito.verify(makeBlackCoffee).makePocess(1);
-	 * 
-	 * }
-	 */
+	}
 }

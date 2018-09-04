@@ -9,9 +9,9 @@ public class WasteProductRecord {
 
 	List<ContainerDto> wasteProductList = new ArrayList();
 
-	public void addWasteProductInList(ContainerDto product) {
+	/*public void addWasteProductInList(ContainerDto product) {
 		wasteProductList.add(product);
 	}
-
+*/
 }
  

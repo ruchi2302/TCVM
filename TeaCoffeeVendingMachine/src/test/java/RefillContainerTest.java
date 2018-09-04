@@ -75,9 +75,6 @@ public class RefillContainerTest {
 	
 	@Test
 	public void shouldSystemSupportRefillContainer7() throws IOException {
-		//Mockito.doNothing().when(container).setMilkContainer(Mockito.anyInt());
-		//Mockito.when(scanner.nextInt()).thenReturn(0).thenReturn(1);
 		refillContainer.refillContainer(7);
-		//Mockito.verify(container).setMilkContainer(Mockito.anyInt());
 	}
 }

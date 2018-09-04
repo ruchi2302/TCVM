@@ -16,15 +16,17 @@ public class InputScanner {
 
 	}
 
-	public String getString() {
-		return scanner.next();
-	}
-
 	public int nextInt() {
 		return scanner.nextInt();
 	}
 
-	public double getDouble() {
-		return scanner.nextDouble();
+	/*public String getString() {
+		return scanner.next();
 	}
+
+	public double getDouble(){
+		return scanner.nextDouble();
+	}*/
+
+	
 }
